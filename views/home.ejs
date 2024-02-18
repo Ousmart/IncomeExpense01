@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Supplier | Login Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='denso1.ico') }}">
+
+    <style>
+        body {
+            margin: 0;
+            background-image: url('/static/picture/heart2.png');
+            background-size:auto;
+        }
+        .topic {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            color: black;
+            font-weight: bold;
+            font-size: 50px;
+        }
+        .pic-icon {
+            height: 5vh;
+            width: 12vw;
+            margin-right: 50px;
+            background-image: url('static/picture/Denso-900x0.ico');
+            background-size: cover; /* Adjust as needed */
+            background-position: center;
+            border-radius: 10px;
+            margin-top: 1vh;
+            margin-bottom: 15vh;
+            /* padding: 40px 40px; */
+        }
+        .form-label {
+            color: black;
+            /* font-size: 24px; */
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 100vh; */
+            /* border: 3px solid red; */
+        }
+        .btn-login {
+            display: flex;
+            justify-content: center;
+        }
+        .btn {
+            width: 400px;
+            background-color: rgb(243, 95, 120);
+            border: none;
+        }
+
+        .topic {
+            display: flex;
+            justify-content: center;
+        }
+        .letter {
+            /* color: black; */
+            /* text-decoration: underline; */
+            display: inline-block;
+            font-weight: 100px;
+            animation: fall 5s ease-in-out infinite;
+            background: linear-gradient(to right, red, rgb(243, 174, 217));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .last-letter {
+            margin-left: 10px;
+        }
+        .mid-letter {
+            color: rgb(226, 10, 53);
+            animation: dukdik 1s ease-in-out infinite;
+        }
+
+        .register-content {
+            display: flex;
+            justify-content: center;
+            margin-top: 1vh;
+        }
+
+
+        .E-box {
+            position: relative;
+            display: inline-block;
+            top: -17px;
+            padding: 0;
+            }
+
+            .line {
+            position: absolute;
+            width: 40px;
+            height: 5px;
+            background: linear-gradient(to right, red, rgb(243, 174, 217));
+            -webkit-background-clip: border-box;
+            border-radius: 5px;
+            bottom: 5px; /* Adjust as needed to position the line under the letter 'E' */
+            left: 50%;
+            transform: translateX(-50%);
+            animation: moveLeftRight 0.5s ease-in-out 1;
+            }
+
+
+        @keyframes moveLeftRight {
+        0% {
+            transform: translateX(-800px); /* Initial position */
+        }
+        50% {
+            transform: translateX(-50%); /* Move the icon to the left */
+        }
+        100% {
+            transform: translateX(-50%); /* Return the icon to the initial position */
+        }
+        }
+        @keyframes moveRect {
+        0% {
+            transform: translate(0, 0); /* Initial position */
+        }
+        15% {
+            transform: rotate(0) translate(0, -20px); /* Move the icon to the left */
+        }
+        50% {
+            transform: rotate(-30deg) translate(-20px, -20px); /* Move the icon to the left */
+        }
+        60% {
+            transform: rotate(30deg) translate(-20px, 0); /* Move the icon to the left */
+        }
+        100% {
+            transform: translate(0, 0); /* Return the icon to the initial position */
+        }
+        }
+        @keyframes fall {
+        0% {
+            transform: translateY(-300px);
+        }
+        5% {
+            transform: translateY(0);
+        }
+        10% {
+            transform: translateY(-30px);
+        }
+        15% {
+            transform: translateY(0);
+        }
+        20% {
+            transform: translateY(-20px);
+        }
+        25% {
+            transform: translateY(0);
+        }
+        30% {
+            transform: translateY(-15px);
+        }
+        35% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-10px);
+        }
+        55% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(0);
+        }
+        }
+        @keyframes blink {
+        0% {
+            color: aquamarine
+        }
+        50% {
+            color:aqua;
+        }
+        100% {
+            color: white;
+        }
+        }
+        @keyframes dukdik {
+        0% {
+            rotate: -3deg;
+        }
+        /* 25% {
+            rotate: 3deg;
+        } */
+        50% {
+            rotate: 3deg;
+        }
+        /* 75% {
+            rotate: -3deg;
+        } */
+        100% {
+            rotate: -3deg;
+        }
+        }
+
+        @media (max-width: 576px) {
+            .pic-icon {
+                height: 10vh; /* Adjust as needed */
+                width: 50vw; /* Adjust as needed */
+                margin-right: 0;
+                margin-bottom: 5vh;
+            }
+            .topic {
+                font-size: 30px;
+            }
+            .form-label {
+                font-size: 18px;
+            }
+            .container {
+                padding-right: 50px;
+                margin: 30px;
+            }
+            .btn {
+                margin: 10px;
+                width: 100%;
+                background-color: rgb(238, 59, 244);
+                <!-- border: 3px solid rgb(0, 255, 21); -->
+            }
+            .E-box {
+                margin-top: 2vh;
+            }
+        }
+        @media only screen and (max-width: 480px) and (orientation: portrait) {
+            body {
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-position: center;
+            }
+            }
+    </style>
+
+</head>
+<body>
+
+    <div class="pic-icon"></div>
+    <div class="topic">
+
+        <!-- <div class="E-box">
+            <span class="letter"><h1>E</h1></span>
+            <div class="line"></div>
+        </div>
+
+        <h1>-</h1>
+        <span class="mid-letter"><h1>Supplier </h1></span> -->
+        <span class="last-letter"><h1>รายรับรายจ่ายของ OuMilin|Login</h1></span>
+    </div>
+
+    <div class="container">
+        <div>
+            <form action="/login" method="POST" class="login-form">
+                <div class="mb-3" style="width: 400px;">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+                </div>
+                <div class="btn-login">
+                    <button type="submit" class="btn btn-secondary">Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="register-content">
+        <a href="/register" class="btn btn-warning register-btn">Register here</a>
+    </div>
+
+    <script>
+        // Disable going back to the previous page
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
+</body>
+</html>

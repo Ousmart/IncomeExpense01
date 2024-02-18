@@ -6,19 +6,34 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
     <style>
         .expense_detail {
-            width: 900px;
-            height: 400px;
-            border: 3px solid red;
+            width: 110rem;
+            height: 70rem;
+            <!-- border: 3px solid red; -->
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
         }
+        .topbar {
+            width: 110rem;
+            height: 7rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dashboard_block {
+            width: 110rem;
+            height: 20rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .expense_detail .header {
             width: 100%;
-            height: 10vh;
+            height: 7rem;
             border: 1px solid gray;
             display: flex;
             justify-content: space-between;
@@ -26,11 +41,28 @@
         }
         .expense_detail .detail {
             width: 100%;
+            height: 7rem;
+            border: 1px solid gray;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .expense_detail .history {
+            width: 100%;
             height: 10vh;
             border: 1px solid gray;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        .expense_detail .sum_history {
+            width: 100%;
+            height: 10vh;
+            border: 1px solid gray;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(248, 182, 214);
         }
     </style>
 </head>
@@ -38,7 +70,16 @@
     
     <div class="topbar">
         <div class="item">
-            <a href="/logout">logout</a>
+            <a href="/main_page">หน้าหลัก</a>
+        </div>
+        <div class="item">
+            <a href="/logout">ลงชื่อออก</a>
+        </div>
+    </div>
+
+    <div class="dashboard_block">
+        <div class="chart_block">
+            <canvas id="myPieChart"></canvas>
         </div>
     </div>
 
@@ -57,41 +98,138 @@
                 <p>ราคา (บาท)</p>
             </div>
             <div class="header-item5">
-                <p>หมายเหตุ</p>
+                <p>จัดการ</p>
             </div>
         </div>
-        <div class="detail">
-            <div class="detail-item1">
-                <input type="date" name="date" id="date">
+        <form action="/main_page/filter" method="POST">
+            <div class="selected_date_form">
+                <input type="date" name="selected_start_date" id="selected_start_date" value="<%= (new Date()).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).split('/').reverse().join('-') %>">
+                to
+                <input type="date" name="selected_end_date" id="selected_end_date" value="<%= (new Date()).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).split('/').reverse().join('-') %>">
             </div>
-            <div class="detail-item2">
-                <select name="category" id="category">
-                    <option value="สำคัญ"><i class="fa fa-car"></i> สำคัญ</option>
-                    <option value="ของใช้">ของใช้</option>
-                    <option value="ข้างนอก">ข้างนอก</option>
-                    <option value="ดีต่อใจ">ดีต่อใจ</option>
-                    <option value="สุขภาพ">สุขภาพ</option>
-                    <option value="ทำกินเอง">ทำกินเอง</option>
-                    <option value="ประกัน">ประกัน</option>
-                    <option value="เติม/ถอน">เติม/ถอน</option>
-                    <option value="มิลิน">มิลิน</option>
-                    <option value="อู๋">อู๋</option>
-                    <option value="ช้อปปิ้ง">ช้อปปิ้ง</option>
-                    <option value="อื่นๆ">อื่นๆ</option>
-                    <option value="กินเล่น">กินเล่น</option>
-                </select>
+            <div class="filter_btn">
+                <button type="submit" name="filter_submit" id="filter_submit" class="btn btn-primary">กรอง</button>
             </div>
-            <div class="detail-item3">
-                <input type="date" name="date" id="date">
+        </form>
+        <form action="/main_page/submit" method="POST">
+            <div class="detail">
+                <div class="detail-item1">
+                    <input type="date" name="date" id="date" value="<%= (new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-') %>">
+                </div>
+                <div class="detail-item2">
+                    <select name="category" id="category">
+                        <option value="สำคัญ"><i class="fa fa-car"></i> สำคัญ</option>
+                        <option value="ของใช้">ของใช้</option>
+                        <option value="ข้างนอก">ข้างนอก</option>
+                        <option value="ดีต่อใจ">ดีต่อใจ</option>
+                        <option value="สุขภาพ">สุขภาพ</option>
+                        <option value="ทำกินเอง">ทำกินเอง</option>
+                        <option value="ประกัน">ประกัน</option>
+                        <option value="เติม/ถอน">เติม/ถอน</option>
+                        <option value="มิลิน">มิลิน</option>
+                        <option value="อู๋">อู๋</option>
+                        <option value="ช้อปปิ้ง">ช้อปปิ้ง</option>
+                        <option value="อื่นๆ">อื่นๆ</option>
+                        <option value="กินเล่น">กินเล่น</option>
+                    </select>
+                </div>
+                <div class="detail-item3">
+                    <textarea name="detail" id="detail"></textarea>
+                </div>
+                <div class="detail-item4">
+                    <input type="number" name="price" id="price" value="0">
+                </div>
+                <div class="detail-item5">
+                    <!-- <textarea name="remark" id="remark"></textarea> -->
+                </div>
             </div>
-            <div class="detail-item4">
-                <input type="date" name="date" id="date">
+            <div class="submit_btn" id="submit_btn">
+                <button type="submit" class="btn btn-success">บันทึก</button>
             </div>
-            <div class="detail-item5">
-                <input type="date" name="date" id="date">
+        </form>
+        <% get_all_datas.forEach((all_data) => { %>
+            <div class="history">
+                <div class="history-item1">
+                    <p><%= all_data.date.toLocaleDateString('en-GB') %></p>
+                </div>
+                <div class="history-item2">
+                    <p><%= all_data.category %></p>
+                </div>
+                <div class="history-item3">
+                    <p><%= all_data.detail %></p>
+                </div>
+                <div class="history-item4">
+                    <p><%= all_data.price %></p>
+                </div>
+                <div class="history-item5">
+                    <p><%= all_data.remark %></p>
+                </div>
+                <div class="history-itemุ">
+                    <div class="id" id="id" hidden>
+
+                    </div>
+                    <a href="/main_page/edit" class="btn btn-warning">เเก้ไข</a>
+                    <a href="/main_page/delete?id=<%= all_data.id %>" class="btn btn-danger">ลบ</a>
+                </div>
+            </div>
+        <% }) %>
+        <div class="sum_history">
+            <div class="history-item1">
+                <p>รวมราคา</p>
+            </div>
+            <div class="history-item2">
+      
+            </div>
+            <div class="history-item3">
+  
+            </div>
+            <div class="history-item4">
+                <p><%= get_sum[0].sum %></p>
+            </div>
+            <div class="history-item5">
+                <div class="id" id="id" hidden>
+
+                </div>
+                <p>บาท</p>
             </div>
         </div>
     </div>
+
+
+    <script>
+        let priceDatas = [];
+        let categoryDatas = [];
+        <% get_sum_category.forEach((row, index) => { %> 
+            priceDatas.push(<%= row.sum %>);
+            categoryDatas.push('<%= row.category %>');
+        <% }) %>
+
+        console.log(categoryDatas);
+
+        const data = {
+            labels: categoryDatas,
+            datasets: [{
+              label: 'My First Dataset',
+              data: priceDatas,
+              backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)'
+              ],
+              hoverOffset: 4
+            }]
+          };
+        
+          const config = {
+            type: 'pie',
+            data: data,
+          };
+        
+          var myPieChart = new Chart(
+            document.getElementById('myPieChart'),
+            config
+          );
+      </script>
     
 </body>
 </html>

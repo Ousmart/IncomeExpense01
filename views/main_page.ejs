@@ -202,14 +202,9 @@
             width: 20rem;
             padding-left: 10px;
         }
-        .history-item5 {
-            border-right: 1px solid black;
-            width: 20rem;
-            padding-left: 10px;
-        }
         <!-- .history-item6 {
             border-right: 1px solid black;
-            width: 20rem;
+            width: 10rem;
             padding-left: 10px;
         } -->
 
@@ -243,11 +238,44 @@
             .detail-item1 {
                 width: 78px;
             }
+            .history-item1 {
+                <!-- border-right: 1px solid black; -->
+                width: 30rem;
+                padding-left: 10px;
+            }
+            .history-item2 {
+                <!-- border-right: 1px solid black; -->
+                width: 30rem;
+                padding-left: 10px;
+            }
+            .history-item3 {
+                
+                width: 10rem;
+                padding-left: 10px;
+            }
+            .history-item4 {
+                
+                width: 10rem;
+                padding-left: 10px;
+            }
+
+            .detail-item2 {
+                font-size: 10px;
+            }
+            <!-- .history-item6 {
+                border-right: 1px solid black;
+                width: 20rem;
+                padding-left: 10px;
+            } -->
             input {
                 width: 20%;
             }
             input[type="date"] {
-                width: 25%;
+                width: 100%;
+                font-size: 8px;
+              }
+              input[type="number"] {
+                width: 100%;
                 font-size: 8px;
               }
               #category select {
@@ -350,7 +378,7 @@
                     <textarea name="detail" id="detail"></textarea>
                 </div>
                 <div class="detail-item4">
-                    <input type="number" name="price" id="price" value="0">
+                    <input type="number" name="price" id="price" value="">
                 </div>
                 <div class="detail-item5">
                     <!-- <textarea name="remark" id="remark"></textarea> -->
@@ -373,9 +401,6 @@
                 </div>
                 <div class="history-item4">
                     <p><%= all_data.price %></p>
-                </div>
-                <div class="history-item5">
-                    <p><%= all_data.remark %></p>
                 </div>
                 <div class="history-itemุ">
                     <div class="id" id="id" hidden>

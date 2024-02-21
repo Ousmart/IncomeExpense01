@@ -7,72 +7,260 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
+        body {
+            margin: 10px 10px;
+        }
+        
+        .topbar {
+            width: 100%;
+            height: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #E3EBFD;
+            border-radius: 10px 10px;
+            
+        }
+        a {
+            text-decoration: none;
+            font-size: 20px;
+            color: black;
+        }
+        .topbar .item1 {
+            margin-left: 4rem;
+
+        }
+        .topbar .item2 {
+            margin-right: 4rem;
+        }
+        .dashboard_block {
+            width: 100%;
+            height: 20rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #D4D2F2;
+            border-radius: 10px 10px;
+            margin-top: 10px;
+        }
+        .filter_form {
+            width: 320px;
+            height: auto;
+            background-color: #FFBFC5;
+            border-radius: 10px 10px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            <!-- justify-content: center; -->
+            align-items: center;
+            padding-top: 15px;
+            padding-left: 10px;
+        }
+        #selected_start_date {
+            width: auto;
+        }
+        #selected_end_date {
+            width: auto;
+        }
+
+
+        .selected_date_topic {
+            font-size: 16px; 
+            font-weight: bold; 
+            background-color: #E8ABB5;
+            width: 100%;
+            transform: translateY(-10px);
+            padding: 3px 3px;
+            padding-left: 10px;
+        }
+        .selected_date_form {
+            <!-- border: 3px solid red; -->
+            display: flex;
+            <!-- justify-content: ; -->
+            align-items: center;
+            padding-left: 3rem;
+            margin-top: 5px;
+        }
+        .filter_btn {
+            margin-top: 9px;
+            margin-left: 2rem;
+        }
+
         .expense_detail {
-            width: 110rem;
+            width: 100%;
             height: 70rem;
             <!-- border: 3px solid red; -->
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
         }
-        .topbar {
-            width: 110rem;
-            height: 7rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .dashboard_block {
-            width: 110rem;
-            height: 20rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
         .expense_detail .header {
             width: 100%;
-            height: 7rem;
-            border: 1px solid gray;
+            height: auto;
+            background-color: #B3DBD8;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 10px 0 10px;
+            margin-top: 10px;
+            border-radius: 10px 10px 0 0;
+            font-size: 18px;
+            font-weight: bold;
+            padding-top: 8px;
+            border-bottom: 1px solid black;
+        }
+        .header-item1 {
+            width: 20rem;
+            height: 100%;
+            border-right: 1px solid black;
+        }
+        .header-item2 {
+            width: 20rem;
+            border-right: 1px solid black;
+        }
+        .header-item3 {
+            width: 20rem;
+            border-right: 1px solid black;
+        }
+        .header-item4 {
+            width: 20rem;
+            border-right: 1px solid black;
+        }
+        .header-item5 {
+            width: 4rem;
+            border-right: 1px solid black;
+        }
+
+        .detail-item1 {
+            width: 20rem;
+            border-right: 1px solid black;
+        }
+        .detail-item2 {
+            width: 20rem;
+            border-right: 1px solid black;
+        }
+        .detail-item3 {
+            width: 20rem;
+            border-right: 1px solid black;
+        }
+        .detail-item4 {
+            width: 20rem;
+            border-right: 1px solid black;
+        }
+        .detail-item5 {
+            width: 4rem;
+            border-right: 1px solid black;
         }
         .expense_detail .detail {
             width: 100%;
-            height: 7rem;
-            border: 1px solid gray;
+            height: auto;
+            display: flex;
+            background-color: #b3dbd8;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 10px 0 10px;
+            border-radius: 0 0 10px 10px;
+        }
+        .submit_btn {
+            width: auto;
+            height: auto;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 10px;
         }
         .expense_detail .history {
             width: 100%;
             height: 10vh;
-            border: 1px solid gray;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 10px 0 10px;
+            border-radius: 10px 10px 0 0;
+            background-color: #FEE5E0;
+            border-bottom: 1px solid black;
         }
+        .history-item1 {
+            border-right: 1px solid black;
+            width: 20rem;
+            padding-left: 10px;
+        }
+        .history-item2 {
+            border-right: 1px solid black;
+            width: 20rem;
+            padding-left: 10px;
+        }
+        .history-item3 {
+            border-right: 1px solid black;
+            width: 20rem;
+            padding-left: 10px;
+        }
+        .history-item4 {
+            border-right: 1px solid black;
+            width: 20rem;
+            padding-left: 10px;
+        }
+        .history-item5 {
+            border-right: 1px solid black;
+            width: 20rem;
+            padding-left: 10px;
+        }
+        <!-- .history-item6 {
+            border-right: 1px solid black;
+            width: 20rem;
+            padding-left: 10px;
+        } -->
+
         .expense_detail .sum_history {
             width: 100%;
             height: 10vh;
-            border: 1px solid gray;
+            background-color: rgb(248, 182, 214);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgb(248, 182, 214);
+            padding: 0 10px 0 10px;
+            border-radius: 0 0 10px 10px;
+            background-color: #FFBBDA;
         }
+
+        .fa-regular {
+            font-size: 20px;
+            color: #8BD2EC;
+        }
+
+        @media screen and (max-width: 800px) {
+            body {
+                font-size: 10px;
+            }
+            .expense_detail .header {
+                font-size: 10px;
+            }
+            .expense_detail .detail {
+                font-size: 10px;
+            }
+            input {
+                width: 20%;
+            }
+            input[type="date"] {
+                width: 25%;
+                font-size: 8px;
+              }
+              select {
+                font-size: 8px;
+              }
+        }
+        
     </style>
 </head>
 <body>
     
     <div class="topbar">
-        <div class="item">
+        <div class="item1">
             <a href="/main_page">หน้าหลัก</a>
         </div>
-        <div class="item">
+        <div class="item2">
             <a href="/logout">ลงชื่อออก</a>
         </div>
     </div>
@@ -82,6 +270,25 @@
             <canvas id="myPieChart"></canvas>
         </div>
     </div>
+
+    <form action="/main_page/filter" method="POST">
+        <div class="filter_form">
+            <div class="selected_date_topic">
+                <i class="fa-regular fa-clock"></i> เลือกช่วงวันได้เลยน้า
+            </div>
+            <div class="selected_date_form">
+                
+                ตั้งเเต่วันที่
+                <input class="form-control" type="date" name="selected_start_date" id="selected_start_date" value="<%= (new Date()).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).split('/').reverse().join('-') %>">
+                ถึง
+                <input class="form-control" type="date" name="selected_end_date" id="selected_end_date" value="<%= (new Date()).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).split('/').reverse().join('-') %>">
+                <button style="width: 10rem;" type="submit" name="filter_submit" id="filter_submit" class="btn btn-primary">กรอง</button>
+            </div>
+            <!-- <div class="filter_btn">
+                <button type="submit" name="filter_submit" id="filter_submit" class="btn btn-primary">กรอง</button>
+            </div> -->
+        </div>
+    </form>
 
     <div class="expense_detail">
         <div class="header">
@@ -101,23 +308,14 @@
                 <p>จัดการ</p>
             </div>
         </div>
-        <form action="/main_page/filter" method="POST">
-            <div class="selected_date_form">
-                <input type="date" name="selected_start_date" id="selected_start_date" value="<%= (new Date()).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).split('/').reverse().join('-') %>">
-                to
-                <input type="date" name="selected_end_date" id="selected_end_date" value="<%= (new Date()).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).split('/').reverse().join('-') %>">
-            </div>
-            <div class="filter_btn">
-                <button type="submit" name="filter_submit" id="filter_submit" class="btn btn-primary">กรอง</button>
-            </div>
-        </form>
+        
         <form action="/main_page/submit" method="POST">
             <div class="detail">
                 <div class="detail-item1">
-                    <input type="date" name="date" id="date" value="<%= (new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-') %>">
+                    <input class="form-control" type="date" name="date" id="date" value="<%= (new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-') %>">
                 </div>
                 <div class="detail-item2">
-                    <select name="category" id="category">
+                    <select name="category" id="category" class="form-control">
                         <option value="สำคัญ"><i class="fa fa-car"></i> สำคัญ</option>
                         <option value="ของใช้">ของใช้</option>
                         <option value="ข้างนอก">ข้างนอก</option>
@@ -167,8 +365,7 @@
                 <div class="history-itemุ">
                     <div class="id" id="id" hidden>
 
-                    </div>
-                    <a href="/main_page/edit" class="btn btn-warning">เเก้ไข</a>
+                </div class="history-item6">
                     <a href="/main_page/delete?id=<%= all_data.id %>" class="btn btn-danger">ลบ</a>
                 </div>
             </div>
